@@ -6,8 +6,8 @@ type Post = { id: number; title: string; body: string };
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
 export async function generateStaticParams() {
-    // Pre-render first 10 posts (change as needed)
-  const res = await fetch(POSTS_URL);
+    // Pre-render first 10 posts (change as needed) 
+  const res = await fetch(POSTS_URL); // fetch all posts 
   const json = await res.json(); // assume it's an array
   const posts = Array.isArray(json) ? json.slice(0, 10) : []; // first 10 posts
   return posts.map((p) => ({ id: String(p.id) })); // must return string params
@@ -36,7 +36,7 @@ async function getPost(id: string): Promise<Post | null> { // fetch single post 
 
 export default async function PostPage({ params }: { params: Promise<{ id: string }> }) { // params is a promise 
   const awaitedParams = await params; // await params to access id property safely
-  const post = await getPost(awaitedParams.id);
+  const post = await getPost(awaitedParams.id); // fetch post data using awaited id
 
   if (!post) {
     notFound();
