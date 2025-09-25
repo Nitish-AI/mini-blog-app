@@ -10,7 +10,7 @@ export async function generateStaticParams() {
   const res = await fetch(POSTS_URL);
   const json = await res.json(); // assume it's an array
   const posts = Array.isArray(json) ? json.slice(0, 10) : []; // first 10 posts
-  return posts.map((p: any) => ({ id: String(p.id) })); // must return string params
+  return posts.map((p) => ({ id: String(p.id) })); // must return string params
 }
 
 // generate metadata dynamically per post
